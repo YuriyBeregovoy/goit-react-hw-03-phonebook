@@ -57,12 +57,20 @@ filterContacts = () => {
 
   };
 
+
+  componentDidUpdate(prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem("contactsPhonebook", JSON.stringify(this.state.contacts))
+    }
+  }
+
+
   render() {
 
     return (
       <Layout>
       <h1>Phonebook</h1>
-      <ContactForm addContactName={this.handleNameSet} setNanoidId={this.loginInputId} onChangeName={e => this.setState({ name: e.target.value })} onChangeNumber={e => this.setState({ number: e.target.value })} nameInpytValue={this.state.name} numberIputValue={this.state.number } />
+      <ContactForm saveContactsStorage={this.componentDidUpdate} addContactName={this.handleNameSet} setNanoidId={this.loginInputId} onChangeName={e => this.setState({ name: e.target.value })} onChangeNumber={e => this.setState({ number: e.target.value })} nameInpytValue={this.state.name} numberIputValue={this.state.number } />
      
       <h2>Contacts</h2>
       <Filter filterInputValue={this.state.filter} onChangeInputFilter={e => this.setState({ filter: e.target.value })} />
