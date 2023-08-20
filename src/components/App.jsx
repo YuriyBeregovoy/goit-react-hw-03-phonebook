@@ -57,12 +57,22 @@ filterContacts = () => {
 
   };
 
+  
+  componentDidMount() {
+    const savedContacts = localStorage.getItem("contactsPhonebook");
+    if (savedContacts !== null) {
+      this.setState({
+        contacts: JSON.parse(savedContacts),
+      })
+    }
+  }
+
 
   componentDidUpdate(prevState) {
     if (prevState.contacts !== this.state.contacts) {
       localStorage.setItem("contactsPhonebook", JSON.stringify(this.state.contacts))
     }
-  }
+  };
 
 
   render() {
